@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="rom-name" content="EunoiaOS 1.1 Aurora">
+    <meta name="device" content="Xiaomi MI A3 (laurel_sprout)">
+    <meta name="version" content="v1.1 Official">
+    <meta name="date" content="25 January 2025">
+    
+    <title>EunoiaOS 1.1 Aurora - MI A3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 1rem auto;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 1.5rem;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
+        }
+
+        .back-link {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: #fff; }
+
+        h1 { font-size: calc(1.5rem + 1vw); margin-bottom: 0.5rem; }
+        .device-tag { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 2rem 0;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-download {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h2 { font-size: 1.2rem; margin: 2rem 0 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; color: #fff; }
+        h3 { font-size: 1rem; color: #888; margin-top: 1rem; }
+        ul { padding-left: 1.2rem; color: #ccc; }
+        li { margin-bottom: 0.5rem; }
+        code { background: rgba(255, 255, 255, 0.1); padding: 2px 6px; border-radius: 4px; color: #fff; font-family: monospace; }
+
+        @media (min-width: 768px) {
+            .container { padding: 3rem; border-radius: 40px; }
+            .btn { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Updates</a>
+        <h1>EunoiaOS 1.1 Aurora</h1>
+        <p class="device-tag">Xiaomi MI A3 (laurel_sprout) | Android 14 | Official</p>
+
+        <div class="button-group">
+            <a href="https://www.pling.com/p/2344545/" target="_blank" class="btn btn-download">Download ROM</a>
+            <a href="https://t.me/KPR0J3C75/1630/10278" target="_blank" class="btn btn-secondary">Download Boot</a>
+            <a href="https://www.paypal.com/paypalme/KentaroAlRamadhan" target="_blank" class="btn btn-secondary">Donate</a>
+        </div>
+
+        <h2>Changelog</h2>
+        <div class="content-box">
+            <h3>New Features</h3>
+            <ul>
+                <li>Game Space for enhanced gaming experience</li>
+                <li>Swipe to Screenshot gesture</li>
+                <li>Double Tap to Sleep on home screen</li>
+                <li>BatteryBar support</li>
+                <li>4G icon toggle option</li>
+                <li>Memory Info in Recent Apps</li>
+            </ul>
+            
+            <h3>Improvements</h3>
+            <ul>
+                <li>Shipped with EunoiaHome as default launcher</li>
+                <li>Redesigned Eunoia Recovery with improved UI</li>
+            </ul>
+
+            <h3>Security</h3>
+            <ul>
+                <li>Updated Android Security Patch to December 2025</li>
+            </ul>
+        </div>
+
+        <h2>Installation Guide</h2>
+        <div class="content-box">
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 15px;">
+                    <strong>1. Boot Image Flash</strong><br>
+                    Connect your device to a PC in Fastboot Mode, then run:<br>
+                    <code>fastboot flash boot boot.img</code>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>2. Enter Recovery</strong><br>
+                    Reboot directly into the recovery mode:<br>
+                    <code>fastboot reboot recovery</code>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>3. Prepare Sideload</strong><br>
+                    On your device recovery, navigate to:<br>
+                    <span style="color: #fff;">Apply Update</span> &gt; <span style="color: #fff;">Apply from ADB</span>
+                </li>
+                <li>
+                    <strong>4. Flash ROM</strong><br>
+                    On your PC, execute the sideload command:<br>
+                    <code>adb sideload filerom.zip</code>
+                </li>
+            </ul>
+        </div>
+
+        <h2>Notes</h2>
+        <div class="content-box">
+            <ul>
+                <li>Vanilla, Non-RDP build.</li>
+                <li>Based on LineageOS trees.</li>
+                <li>Support Group: <a href="https://t.me/ABCDEFGHIJKLMNOPQRSTUFWXYZ000000/37" style="color: #fff; text-decoration: underline;">ABCD</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

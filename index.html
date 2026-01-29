@@ -106,7 +106,7 @@
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
         }
 
-        .rom-item {
+        .rom-item, .news-item {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 15px;
@@ -116,18 +116,24 @@
             transition: 0.3s;
         }
 
-        .rom-item:hover {
+        .rom-item:hover, .news-item:hover {
             border-color: #fff;
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .rom-title {
+        .rom-title, .news-title {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
         }
 
-        .rom-info {
+        .news-description {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .rom-info, .news-time {
             font-size: 0.85rem;
             color: #888;
             display: flex;
@@ -150,7 +156,7 @@
 
         @media (min-width: 768px) {
             .content-area { padding: 2.5rem; border-radius: 35px; }
-            .rom-title { font-size: 1.3rem; }
+            .rom-title, .news-title { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -175,14 +181,17 @@
             </div>
 
             <div id="news-section" class="hidden">
-                <div class="empty-msg">No news available at the moment.</div>
+                <div id="news-container"></div>
             </div>
         </div>
     </div>
 
     <script>
         const ROM_FOLDER = 'upload/';
+        const NEWS_FOLDER = 'news/';
+
         const ROM_FILES = ['eunoiaos-1.1-aurora-20260125-laurel-sprout.html'];
+        const NEWS_FILES = ['welcome-news.html']; 
 
         function switchTab(type) {
             document.getElementById('update-section').classList.toggle('hidden', type !== 'update');
@@ -191,43 +200,53 @@
             document.getElementById('btn-news').classList.toggle('active', type === 'news');
         }
 
-        async function loadROMs() {
-            const container = document.getElementById('rom-container');
+        async function loadContent(folder, files, containerId, isROM) {
+            const container = document.getElementById(containerId);
             
-            if (ROM_FILES.length === 0) {
-                container.innerHTML = '<div class="empty-msg">No updates available yet.</div>';
+            if (files.length === 0) {
+                container.innerHTML = `<div class="empty-msg">No ${isROM ? 'updates' : 'news'} available yet.</div>`;
                 return;
             }
 
-            container.innerHTML = '<div class="empty-msg">Loading updates...</div>';
+            container.innerHTML = `<div class="empty-msg">Loading...</div>`;
             
             let htmlContent = '';
-            for (const file of ROM_FILES) {
+            for (const file of files) {
                 try {
-                    const res = await fetch(ROM_FOLDER + file);
+                    const res = await fetch(folder + file);
                     const text = await res.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
                     
-                    const name = doc.querySelector('meta[name="rom-name"]')?.content || 'Unknown ROM';
-                    const device = doc.querySelector('meta[name="device"]')?.content || 'Unknown';
-                    const date = doc.querySelector('meta[name="date"]')?.content || '';
-
-                    htmlContent += `
-                        <div class="rom-item" onclick="window.location.href='${ROM_FOLDER + file}'">
-                            <div class="rom-title">${name}</div>
-                            <div class="rom-info">
-                                <span>${device}</span>
-                                <span>${date}</span>
-                            </div>
-                        </div>
-                    `;
+                    if (isROM) {
+                        const name = doc.querySelector('meta[name="rom-name"]')?.content || 'Unknown ROM';
+                        const device = doc.querySelector('meta[name="device"]')?.content || 'Unknown';
+                        const date = doc.querySelector('meta[name="date"]')?.content || '';
+                        htmlContent += `
+                            <div class="rom-item" onclick="window.location.href='${folder + file}'">
+                                <div class="rom-title">${name}</div>
+                                <div class="rom-info"><span>${device}</span><span>${date}</span></div>
+                            </div>`;
+                    } else {
+                        const title = doc.querySelector('meta[name="news-title"]')?.content || 'No Title';
+                        const desc = doc.querySelector('meta[name="news-description"]')?.content || '';
+                        const date = doc.querySelector('meta[name="date"]')?.content || '';
+                        htmlContent += `
+                            <div class="news-item" onclick="window.location.href='${folder + file}'">
+                                <div class="news-title">${title}</div>
+                                <div class="news-description">${desc}</div>
+                                <div class="news-time">${date}</div>
+                            </div>`;
+                    }
                 } catch (e) { console.error(e); }
             }
-            container.innerHTML = htmlContent || '<div class="empty-msg">No valid updates found.</div>';
+            container.innerHTML = htmlContent || `<div class="empty-msg">No valid content found.</div>`;
         }
 
-        document.addEventListener('DOMContentLoaded', loadROMs);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent(ROM_FOLDER, ROM_FILES, 'rom-container', true);
+            loadContent(NEWS_FOLDER, NEWS_FILES, 'news-container', false);
+        });
     </script>
 </body>
 </html>

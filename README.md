@@ -4,7 +4,7 @@ Central hub for ROM updates, official news, and device-specific documentation.
 
 ## About
 
-This is the official website for N1709 ROM updates and documentation. Visit [n1709.github.io](https://n1709.github.io) for the latest information.
+This is the official website for Updates and documentation.
 
 ## Structure
 

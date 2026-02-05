@@ -161,7 +161,30 @@
             border-radius: 25px;
             padding: 1.5rem;
             min-height: 40vh;
+            max-height: 70vh;
+            overflow-y: auto;
+            overflow-x: hidden;
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content-area::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .content-area::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .content-area::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .rom-item, .news-item {
